@@ -1,0 +1,66 @@
+.LeftCP{
+    height: 100%;
+    width: 6%;
+    background-color: green;
+    display: table-cell;
+}
+
+.ButtonBlock{
+    position: absolute;
+    top: 5%;
+    height: 30.8%;
+    width: 6%;
+    background-color: aqua;
+
+}
+
+.Button{
+    height: 33.33%;
+    width: 100%;
+}
+
+.Button:hover{
+    border: 2px solid black;
+}
+
+.picture{
+    height: 100%;
+    width: 100%
+}
+
+.Stats{
+    position: absolute;
+    bottom: 0;
+    width: 6%;
+    text-align: center;
+    background-color: salmon;
+}
+
+    @media screen and (max-width: 1024px) {
+        .Stats{
+            font-size: 100%;
+        }
+    }
+    
+    @media screen and (max-width: 950px) {
+        .Stats{
+            font-size: 60%;
+        }
+    
+    }
+    
+    
+    @media screen and (max-width: 650px) {
+        .Stats{
+            font-size: 40%;
+        }
+    
+    
+    }
+    
+    @media screen and (max-width: 480px) {
+        .Stats{
+            font-size: 30%;
+        }
+    
+    }

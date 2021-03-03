@@ -1,0 +1,27 @@
+.GameBoard{
+    position: absolute;
+    bottom: 0;
+    height: 95%;
+    width: 100%;
+    background-color: brown;
+}
+
+.empty{
+    border: 1px solid black;
+    background-color: lightpink;
+}
+
+.circle{
+    border: 1px solid black;
+    background-image:  url('../resources/circle.png');
+}
+
+.cross{
+    border: 1px solid black;
+    background-image:  url('../resources/cross.png');
+}
+
+.winner{
+    background-image:  url('../resources/crown.png');
+    border: 1px solid black;
+}

@@ -1,0 +1,10 @@
+.MessageScreen{
+    position: absolute;
+    top: 0;
+    height: 5%;
+    width: 100%;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

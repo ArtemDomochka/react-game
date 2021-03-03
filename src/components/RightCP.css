@@ -1,0 +1,23 @@
+.RightCP{
+    height: 100%;
+    width: 6%;
+    background-color: red;
+    display: table-cell;
+}
+
+.rButton{
+    height: 4.9%;
+    width: 97%;
+    border: 1px solid black;
+}
+
+.rButton:hover{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.rpicture{
+    height: 100%;
+    left: 0;
+    width: 100%;
+}
