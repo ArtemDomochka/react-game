@@ -1,4 +1,4 @@
-.Settings{
+.Statistics{
     position: absolute;
     height: 50%;
     width:40%;
@@ -10,5 +10,20 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: white;
+}
+
+.stContent{
+    color: white
+}
+
+.st-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: black;
+    background-color: rgba(42, 42, 180, 0.945);
+}
+
+.st-button:hover{
+    filter: brightness(1.15);
 }

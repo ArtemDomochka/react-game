@@ -10,7 +10,7 @@ const   RightCP = props => {
     return(
         <div className="RightCP">
             <div className="rButtonBlock">
-                <div className="rButton rtop" onClick={()=>{alert("Sttings")}}>
+                <div className="rButton rtop" onClick={props.handleSettingsClick}>
                     <img src={settingsImg} alt="Settings" className="rpicture"/>
                 </div>
                 <div className="rButton" onClick={props.handleFullScreenClick}>
@@ -19,7 +19,7 @@ const   RightCP = props => {
                 <div className="rButton" onClick={props.handleMuteClick}>
                     <img src={muteImg} alt="Mute" className="rpicture"/>
                 </div>
-                <div className="rButton rbot" onClick={()=>{alert("Stats")}}>
+                <div className="rButton rbot" onClick={props.handleStatsClick}>
                     <img src={statsImg} alt="Stats" className="rpicture"/>
                 </div>
             </div>

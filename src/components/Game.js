@@ -6,6 +6,9 @@ import LeftCP from './LeftCP'
 import RightCP from './RightCP'
 import MessageScreen from './MessageScreen'
 import musicSound from '../resources/soundtrack.mp3'
+import Hotkeys from 'react-hot-keys'
+import Statistics from './Statistics'
+import Settings from './Settings'
 
 const music = new Audio(musicSound)
 
@@ -22,12 +25,23 @@ class Game extends React.Component {
                 "empty","empty","empty",
                 "empty","empty","empty"
             ],
-            wins: 0
+            stats : {
+                win: 0,
+                lose: 0,
+                tie: 0
+            },
+            settingsVisibility : "hidden",
+            statisticsVisibility : "hidden"
         }
+
+        this.boardRef = React.createRef();
 
         this.onCellClick = this.onCellClick.bind(this);
         this.refreshGame = this.refreshGame.bind(this);
         this.playAutoGame = this.playAutoGame.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleSettingsClick = this.handleSettingsClick.bind(this);
+        this.handleStatsClick = this.handleStatsClick.bind(this);
     }
 
     componentDidMount(){
@@ -36,10 +50,14 @@ class Game extends React.Component {
         music.play()
     }
 
-    onCellClick(event){
+    async onCellClick(event){
         if(this.state.status !== "playing"){
             return
         }
+        this.setState({
+            status: "notPlaying"
+        })
+
         //change color
         const cellId = event.target.id
         if(this.state.boardStatus[cellId] === "empty"){
@@ -64,17 +82,29 @@ class Game extends React.Component {
             return
         }
 
-        if(this.state.mode === "vsPc"){
-            this.makePcTurn()
-        }
-
         if(this.isGameFinished()){
             this.setState({
                 status: "notPlaying"
             })
+            return
         }
 
+        if(this.state.mode === "vsPc"){
+            await this.sleep(500)
+            this.makePcTurn()
+        }
 
+        if(this.isGameFinished()){
+            console.log("Finished")
+            this.setState({
+                status: "notPlaying"
+            })
+            return
+        }
+
+        this.setState({
+            status: "playing"
+        })
     }
 
     makePcTurn(){ 
@@ -86,9 +116,6 @@ class Game extends React.Component {
                     boardStatus: boardStatus,
                     player: "X"
                 })
-
-                
-
                 break;
             }
         }
@@ -151,8 +178,10 @@ class Game extends React.Component {
             })
 
             if(this.state.mode === "vsPc" && this.state.player === "X"){
+                let stats = this.state.stats
+                stats.win++
                 this.setState({
-                    wins: this.state.wins + 1
+                    stats: stats
                 })              
             }
 
@@ -175,14 +204,20 @@ class Game extends React.Component {
 
     }
 
-    playAutoGame(){
+    sleep(milliseconds){
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+      
+
+    async playAutoGame(){
         this.setState({
-            message: "mode: Auto Game",
+            message: "Playing Auto Game",
             mode: "autoGame",
+            status: "notPlaying"
         })
 
         let player = "X"
-        while(this.state.status === "playing"){
+        while(true){
             let boardStatus = this.state.boardStatus
             for(let i = 0; i < boardStatus.length; i++){
                 if(boardStatus[i] === "empty"){
@@ -195,16 +230,25 @@ class Game extends React.Component {
                         player = "X"
                     }
                     
-                    //sleep(1 sec) or wait(1 sec)
+                    await this.sleep(1000)
+
                     this.setState({
-                        player: player,
                         boardStatus: boardStatus
                     })
                     break;
                 }
             }
             
-            if(this.isGameFinished()) break;
+            if(this.isGameFinished()){
+                this.setState({
+                    status: "notPlaying"
+                })
+                break;
+            }
+
+            this.setState({
+                player: player
+            })
         }
     }
 
@@ -231,15 +275,83 @@ class Game extends React.Component {
         
     }
 
+    handleSettingsClick(){
+        if(this.state.settingsVisibility === "hidden"){
+            this.setState({
+                settingsVisibility: "visible"
+            })
+        }else{
+            this.setState({
+                settingsVisibility : "hidden"
+            })
+        }
+    }
+
+    handleStatsClick(){
+        if(this.state.statisticsVisibility === "hidden"){
+            this.setState({
+                statisticsVisibility: "visible"
+            })
+        }else{
+            this.setState({
+                statisticsVisibility : "hidden"
+            })
+        }
+    }
+
+    handleKeyPress = e => { 
+        switch(e){
+            case "f":
+                this.props.handleFullScreenClick()
+                break
+            case "m":
+                this.handleMuteClick()
+                break
+            case "Esc":
+                this.handleSettingsClick()
+                break
+            case "q":
+                this.refreshGame()
+                this.setState({mode: "vsPc", message: "Playing Game Vs Computer"})
+                break
+            case "w":
+                this.refreshGame()
+                this.setState({mode: "2Players", message: "Playing Vs Another Player"})
+                break
+            case "e":
+                this.refreshGame()
+                setTimeout(()=>{this.playAutoGame()}, 200)
+                break
+            case "s":
+                this.handleStatsClick()
+                break
+            default:
+                console.log("Hothey error!")
+        }
+    }
+
     render(){
         return(
+            <Hotkeys
+                keyName="f,m,Esc,q,w,e,s"
+                onKeyDown={this.handleKeyPress.bind(this)}
+            >
+            <Statistics
+                visibility={this.state.statisticsVisibility}
+                statistics={this.state.stats}
+                handleStatsClick={this.handleStatsClick}
+            />    
+            <Settings
+                visibility={this.state.settingsVisibility}
+            />        
             <div className="Game">
                 <div className="GameBoardAndCPsAndMessageScreen">
                     <LeftCP
+                    onKeyDown={()=>{console.log("OOO")}}
                         playNewGameVsPc={()=>{this.refreshGame(); this.setState({mode: "vsPc", message: "Playing Game Vs Computer"})}}
                         playNewGameVsPlayer={()=>{this.refreshGame(); this.setState({mode: "2Players", message: "Playing Vs Another Player"})}}
                         playAutoGame={()=>{this.refreshGame(); setTimeout(()=>{this.playAutoGame()}, 200)}}
-                        wins={this.state.wins}
+                        wins={this.state.stats.win}
                     />
                     <div className="MessageScreenAndGameBoard">
                         <MessageScreen
@@ -253,11 +365,13 @@ class Game extends React.Component {
                     <RightCP
                         handleFullScreenClick={this.props.handleFullScreenClick}
                         handleMuteClick={this.handleMuteClick}      
-                        handleSettings={this.handleSettings}                
+                        handleSettingsClick={this.handleSettingsClick}   
+                        handleStatsClick={this.handleStatsClick}             
                     />
                 </div>
                 <Footer/>
             </div>
+            </Hotkeys>
         )
     }
  
