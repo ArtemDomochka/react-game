@@ -58,7 +58,10 @@ class Game extends React.Component {
                 })
             }
         }else{
-            console.log("you cant play there");
+            this.setState({
+                message: "You can't play there"
+            })
+            return
         }
 
         if(this.state.mode === "vsPc"){
@@ -83,6 +86,9 @@ class Game extends React.Component {
                     boardStatus: boardStatus,
                     player: "X"
                 })
+
+                
+
                 break;
             }
         }
@@ -188,6 +194,8 @@ class Game extends React.Component {
                         boardStatus[i] = "circle"
                         player = "X"
                     }
+                    
+                    //sleep(1 sec) or wait(1 sec)
                     this.setState({
                         player: player,
                         boardStatus: boardStatus

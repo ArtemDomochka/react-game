@@ -3,25 +3,35 @@
     bottom: 0;
     height: 95%;
     width: 100%;
-    background-color: brown;
+    background-color: #ff0058;
 }
 
-.empty{
-    border: 1px solid black;
-    background-color: lightpink;
+.btn-clm{
+    height: 33.33%;
+    width: 100%;
+    display: flex;
 }
 
-.circle{
-    border: 1px solid black;
-    background-image:  url('../resources/circle.png');
+.btn{
+    height: 100%;
+    width: 33.33%;
 }
 
-.cross{
+.pct{
+    height: 100%;
+    width: 100%;
     border: 1px solid black;
-    background-image:  url('../resources/cross.png');
 }
 
-.winner{
-    background-image:  url('../resources/crown.png');
-    border: 1px solid black;
+.pct:hover{
+    filter: brightness(1.25);
 }
+
+
+
+
+
+
+
+
+

@@ -3,21 +3,40 @@
     width: 6%;
     background-color: red;
     display: table-cell;
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+
+}
+
+.rButtonBlock{
+    position: absolute;
+    top: 5%;
+    height: 40.11%;
+    width: 6%;
+    background-color: brown;
+
 }
 
 .rButton{
-    height: 4.9%;
-    width: 97%;
-    border: 1px solid black;
+    height: 25%;
+    width: 100%;
 }
 
 .rButton:hover{
     border-top: 2px solid black;
     border-bottom: 2px solid black;
+    filter: brightness(1.15);
+    cursor: pointer;
 }
 
 .rpicture{
-    height: 100%;
-    left: 0;
-    width: 100%;
+    height: 98%;
+    width: 100%
+}
+
+.rtop{
+    border-top: 1px solid brown;
+}
+
+.rbot{
+    border-bottom: 1px solid brown;
 }

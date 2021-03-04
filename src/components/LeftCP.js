@@ -1,6 +1,8 @@
 import React from 'react'
 import './LeftCP.css'
-import pic from '../resources/logo.png'
+import vsPC from '../resources/monitor.jpeg'
+import PvP from '../resources/PvP.png'
+import autoGame from '..//resources/autoplay.png'
 
 const   LeftCP = props => {
 
@@ -8,13 +10,13 @@ const   LeftCP = props => {
         <div className="LeftCP">
             <div className="ButtonBlock">
                 <div className="Button" onClick={props.playNewGameVsPc}>
-                    <img src={pic} alt="Auto Game" className="picture"/>
+                    <img src={vsPC} alt="VS PC" className="picture"/>
                 </div>
                 <div className="Button" onClick={props.playNewGameVsPlayer}>
-                    <img src={pic} alt="Auto Game" className="picture"/>
+                    <img src={PvP} alt="PvP" className="picture"/>
                 </div>
                 <div className="Button" onClick={props.playAutoGame}> 
-                    <img src={pic} alt="Auto Game" className="picture"/>
+                    <img src={autoGame} alt="Auto Game" className="picture"/>
                 </div>
             </div>
 

@@ -1,23 +1,29 @@
 import React from 'react'
 import './RightCP.css'
-import pic from '../resources/logo.png'
+import settingsImg from '..//resources/settings.png'
+import fullscreenImg from '..//resources/fullscreen.png'
+import muteImg from '..//resources/mute.png'
+import statsImg from '..//resources/stats.png'
 
 const   RightCP = props => {
 
     return(
         <div className="RightCP">
-            <div className="rButton" onClick={props.handleSettings}>
-                <img src={pic} alt="Auto Game" className="rpicture"/>
+            <div className="rButtonBlock">
+                <div className="rButton rtop" onClick={()=>{alert("Sttings")}}>
+                    <img src={settingsImg} alt="Settings" className="rpicture"/>
+                </div>
+                <div className="rButton" onClick={props.handleFullScreenClick}>
+                    <img src={fullscreenImg} alt="Fullscreen" className="rpicture"/>
+                </div>
+                <div className="rButton" onClick={props.handleMuteClick}>
+                    <img src={muteImg} alt="Mute" className="rpicture"/>
+                </div>
+                <div className="rButton rbot" onClick={()=>{alert("Stats")}}>
+                    <img src={statsImg} alt="Stats" className="rpicture"/>
+                </div>
             </div>
-            <div className="rButton" onClick={props.handleFullScreenClick}>
-                <img src={pic} alt="Auto Game" className="rpicture"/>
-            </div>
-            <div className="rButton" onClick={props.handleMuteClick}>
-                <img src={pic} alt="Auto Game" className="rpicture"/>
-            </div>
-            <div className="rButton" onClick={()=>{alert("Stats")}}>
-                <img src={pic} alt="Auto Game" className="rpicture"/>
-            </div>
+            
         </div>
     )
 }
