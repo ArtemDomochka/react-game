@@ -6,11 +6,13 @@ import LeftCP from './LeftCP'
 import RightCP from './RightCP'
 import MessageScreen from './MessageScreen'
 import musicSound from '../resources/soundtrack.mp3'
+import bSound from '../resources/button-16.mp3'
 import Hotkeys from 'react-hot-keys'
 import Statistics from './Statistics'
 import Settings from './Settings'
 
 const music = new Audio(musicSound)
+const buttonSound = new Audio(bSound)
 
 class Game extends React.Component {
     constructor(props){
@@ -31,7 +33,10 @@ class Game extends React.Component {
                 tie: 0
             },
             settingsVisibility : "hidden",
-            statisticsVisibility : "hidden"
+            statisticsVisibility : "hidden",
+            musicVolume: 0,
+            buttonVolume: 0,
+            difficalty: "easy"
         }
 
         this.boardRef = React.createRef();
@@ -42,12 +47,47 @@ class Game extends React.Component {
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleSettingsClick = this.handleSettingsClick.bind(this);
         this.handleStatsClick = this.handleStatsClick.bind(this);
+        this.handleMuteClick = this.handleMuteClick.bind(this);
+        this.changeMusicVolume = this.changeMusicVolume.bind(this);
+        this.changeSoundVolume = this.changeSoundVolume.bind(this);
+        this.handleDifficalty = this.handleDifficalty.bind(this);
     }
 
     componentDidMount(){
         music.volume = 0
+        buttonSound.volume = 0
         music.loop = true
-        music.play()
+        
+        this.setState({
+            status: localStorage.getItem("status") || "playing",
+            player: localStorage.getItem("player") || "X",
+            message: localStorage.getItem("message") || "Weclome!",
+            mode: localStorage.getItem("mode") || "vsPc!",
+            difficalty: localStorage.getItem("difficalty") || "easy!",
+            settingsVisibility: localStorage.getItem("settingsVisibility") || "hidden!",
+            statisticsVisibility: localStorage.getItem("statisticsVisibility") || "hidden!",
+            stats: JSON.parse(localStorage.getItem("stats")) || {win:0, lose:0, tie:0},
+            boardStatus: JSON.parse(localStorage.getItem("boardStatus")) || [
+                "empty","empty","empty",
+                "empty","empty","empty",
+                "empty","empty","empty"
+            ]
+        })
+        
+    }
+
+    componentDidUpdate(){
+
+        localStorage.setItem("status", this.state.status)
+        localStorage.setItem("player", this.state.player)
+        localStorage.setItem("message", this.state.message)
+        localStorage.setItem("mode", this.state.mode)
+        localStorage.setItem("difficalty", this.state.difficalty)
+        localStorage.setItem("settingsVisibility", this.state.settingsVisibility)
+        localStorage.setItem("statisticsVisibility", this.state.statisticsVisibility)
+        localStorage.setItem("stats", JSON.stringify(this.state.stats))
+        localStorage.setItem("boardStatus", JSON.stringify(this.state.boardStatus))
+
     }
 
     async onCellClick(event){
@@ -108,15 +148,31 @@ class Game extends React.Component {
     }
 
     makePcTurn(){ 
-        for(let i = 0; i < this.state.boardStatus.length; i++){ 
-            if(this.state.boardStatus[i] === "empty"){
-                let boardStatus = this.state.boardStatus
-                boardStatus[i] = "circle"
-                this.setState({
-                    boardStatus: boardStatus,
-                    player: "X"
-                })
-                break;
+        if(this.state.difficalty === "easy"){
+            for(let i = 0; i < this.state.boardStatus.length; i++){ 
+                if(this.state.boardStatus[i] === "empty"){
+                    let boardStatus = this.state.boardStatus
+                    boardStatus[i] = "circle"
+                    this.setState({
+                        boardStatus: boardStatus,
+                        player: "X"
+                    })
+                    break;
+                }
+            }
+        }else{
+        //clever
+        let turns = [3,1,8,5,4,2,7,6,0]
+            for(let i = 0; i < this.state.boardStatus.length; i++){
+                if(this.state.boardStatus[turns[i]] === "empty"){
+                    let boardStatus = this.state.boardStatus
+                    boardStatus[turns[i]] = "circle"
+                    this.setState({
+                        boardStatus: boardStatus,
+                        player: "X"
+                    })
+                    break;
+                }
             }
         }
     }
@@ -266,12 +322,20 @@ class Game extends React.Component {
     }
 
     handleMuteClick(){
+        music.play()
+        
         if(music.volume === 0){
             music.volume = 1
+            buttonSound.volume = 1
         }else{
             music.volume = 0
+            buttonSound.volume = 0
         }
 
+        this.setState({
+            musicVolume: music.volume,
+            buttonVolume: buttonSound.volume
+        })
         
     }
 
@@ -330,6 +394,27 @@ class Game extends React.Component {
         }
     }
 
+    changeMusicVolume(value){
+        music.volume=value
+        this.setState({
+            musicVolume:value
+        })
+    }
+
+    changeSoundVolume(value){
+        buttonSound.volume=value
+        this.setState({
+            buttonVolume:value
+        })
+    }
+
+    handleDifficalty(event){
+        console.log(event.target.value);
+        this.setState({
+            difficalty: event.target.value
+        })
+    }
+
     render(){
         return(
             <Hotkeys
@@ -343,6 +428,12 @@ class Game extends React.Component {
             />    
             <Settings
                 visibility={this.state.settingsVisibility}
+                handleSettingsClick={this.handleSettingsClick}
+                changeMusicVolume={this.changeMusicVolume}
+                musicVolume={this.state.musicVolume}
+                buttonVolume={this.state.buttonVolume}
+                changeSoundVolume={this.changeSoundVolume}
+                handleDifficalty={this.handleDifficalty}
             />        
             <div className="Game">
                 <div className="GameBoardAndCPsAndMessageScreen">
@@ -352,6 +443,7 @@ class Game extends React.Component {
                         playNewGameVsPlayer={()=>{this.refreshGame(); this.setState({mode: "2Players", message: "Playing Vs Another Player"})}}
                         playAutoGame={()=>{this.refreshGame(); setTimeout(()=>{this.playAutoGame()}, 200)}}
                         wins={this.state.stats.win}
+                        buttonSound={buttonSound}
                     />
                     <div className="MessageScreenAndGameBoard">
                         <MessageScreen
@@ -366,7 +458,8 @@ class Game extends React.Component {
                         handleFullScreenClick={this.props.handleFullScreenClick}
                         handleMuteClick={this.handleMuteClick}      
                         handleSettingsClick={this.handleSettingsClick}   
-                        handleStatsClick={this.handleStatsClick}             
+                        handleStatsClick={this.handleStatsClick}  
+                        buttonSound={buttonSound}           
                     />
                 </div>
                 <Footer/>

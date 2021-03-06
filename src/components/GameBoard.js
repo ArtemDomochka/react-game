@@ -4,6 +4,7 @@ import crossImg from '..//resources/cross.png'
 import circleImg from '..//resources/circle.png'
 import emptyImg from '..//resources/empty.png'
 import winnerImg from '..//resources/crown.png'
+import Image from './Image'
 
 const GameBoard = props => {
     
@@ -31,7 +32,8 @@ const formatBoard = () => {
                                 : item === "empty"
                                   ? <img src={emptyImg} alt="Empty" className="pct" id={index1*3 + index2}/>
                                   : item === "cross"
-                                    ? <img src={crossImg} alt="Cross" className="pct" id={index1*3 + index2}/>
+                                    ? <Image crossImg={crossImg} id={index1*3 + index2}
+                                        />  //<img src={crossImg} alt="Cross" className="pct" id={index1*3 + index2}/>
                                     : <img src={circleImg} alt="Circle" className="pct" id={index1*3 + index2}  />
                                 
                             }

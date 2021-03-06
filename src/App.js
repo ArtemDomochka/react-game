@@ -2,7 +2,6 @@ import './App.css';
 import Game from './components/Game'
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
 
-
 function App() {
   const handle = useFullScreenHandle()
 

@@ -10,16 +10,16 @@ const   RightCP = props => {
     return(
         <div className="RightCP">
             <div className="rButtonBlock">
-                <div className="rButton rtop" onClick={props.handleSettingsClick}>
+                <div className="rButton rtop" onClick={()=>{props.handleSettingsClick(); props.buttonSound.play()}}>
                     <img src={settingsImg} alt="Settings" className="rpicture"/>
                 </div>
-                <div className="rButton" onClick={props.handleFullScreenClick}>
+                <div className="rButton" onClick={()=>{props.handleFullScreenClick(); props.buttonSound.play()}}>
                     <img src={fullscreenImg} alt="Fullscreen" className="rpicture"/>
                 </div>
-                <div className="rButton" onClick={props.handleMuteClick}>
+                <div className="rButton" onClick={()=>{props.handleMuteClick(); props.buttonSound.play()}}>
                     <img src={muteImg} alt="Mute" className="rpicture"/>
                 </div>
-                <div className="rButton rbot" onClick={props.handleStatsClick}>
+                <div className="rButton rbot" onClick={()=>{props.handleStatsClick(); props.buttonSound.play()}}>
                     <img src={statsImg} alt="Stats" className="rpicture"/>
                 </div>
             </div>

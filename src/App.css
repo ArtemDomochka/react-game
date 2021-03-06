@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     background: linear-gradient(#E9F8FF, #90B2D8, #C1E3FF);
-}
+} 
 
 .App > * {
     filter:none;
