@@ -2,7 +2,6 @@
     position: absolute;
     height: 50%;
     width:40%;
-    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(2,7,46,1) 55%, rgba(5,111,188,1) 63%, rgba(4,132,202,1) 74%, rgba(0,212,255,1) 75%, rgba(9,9,121,1) 100%);
     border: 2px solid black;
     z-index: 1;
     top: 10%;
@@ -10,6 +9,14 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.blue{
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+}
+
+.red{
+    background: linear-gradient(#FFFFFF, red, #FFFFFF);
 }
 
 .stContent{

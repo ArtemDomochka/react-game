@@ -4,8 +4,15 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    background: linear-gradient(#E9F8FF, #90B2D8, #C1E3FF);
 } 
+
+.blues{
+    background: linear-gradient(#E9F8FF, #90B2D8, #C1E3FF);
+}
+
+.reds{
+    background: linear-gradient(#FFFFFF, rgb(255, 108, 108), #FFFFFF);
+}
 
 .App > * {
     filter:none;

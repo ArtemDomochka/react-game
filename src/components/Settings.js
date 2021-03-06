@@ -5,7 +5,7 @@ const Settings = props => {
 
     return(
 
-        <div className="Settings" style={{visibility:props.visibility}}>
+        <div className={"Settings " + props.theme} style={{visibility:props.visibility}}>
             <button className="set-button" onClick={props.handleSettingsClick}>
                 X
             </button>
@@ -44,19 +44,33 @@ const Settings = props => {
                     <br/>
                     <div onChange={props.handleDifficalty}>
                         <input type="radio" value="easy" name="dif"/> Easy
-                        <input type="radio" value="hard" name="dif"/> Hard
+                        <input type="radio" value="hard" name="dif" defaultChecked/> Hard
                     </div>
                 </div>
 
+                <br/>
+                <div className="tab"> 
+                    <label>Theme:</label>
+                    <br/>
+                    <div onChange={props.handleChangeTheme}>
+                        <input type="radio" value="blue" name="theme" defaultChecked/> Blue
+                        <input type="radio" value="red" name="theme"/> Red
+                    </div>
+                </div>
+                <br/>
 
-                <p>HotKeys:</p>
-                <p>Fullscreen: f</p>
-                <p>Mute/Unmute music: m</p>
-                <p>Statistics: s</p>
-                <p>Settings: Esc</p>
-                <p>Play vs PC: q</p>
-                <p>Play vs player: w</p>
-                <p>Play auto-game: e</p>
+                <div className="tab"> 
+                    <label>Board Size:</label>
+                    <br/>
+                    <div onChange={props.handleChangeBoardSize}>
+                        <input type="radio" value={70} name="size" defaultChecked/> 70%
+                        <input type="radio" value={85} name="size"/> 85%
+                        <input type="radio" value={100} name="size"/> 100%
+                    </div>
+                </div>
+
+                <p>HOTKEYS: Fullscreen=F; Mute/Unmute music=M; Statistics=S; Settings=Esc; PlayVsPC=Q; PlayVsPlayer=W; PlayAutoGame=E</p>
+ 
             </div>          
         </div>
 

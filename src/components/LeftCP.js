@@ -7,7 +7,7 @@ import autoGame from '..//resources/autoplay.png'
 const   LeftCP = props => {
 
     return(
-        <div className="LeftCP">
+        <div className={"LeftCP " + props.theme}>
             <div className="ButtonBlock">
                 <div className="Button" onClick={()=>{props.playNewGameVsPc(); props.buttonSound.play()}}>
                     <img src={vsPC} alt="VS PC" className="picture"/>

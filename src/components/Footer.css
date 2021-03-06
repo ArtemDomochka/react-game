@@ -3,11 +3,17 @@
     bottom: 0;
     height: 5%;
     width: 100%;
-    background-color: darkolivegreen;
     display: flex;
     justify-content: center;
-    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
     color: white
+}
+
+.blue{
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+}
+
+.red{
+    background: linear-gradient(#FFFFFF, red, #FFFFFF);
 }
 
 .Button{

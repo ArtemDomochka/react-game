@@ -4,7 +4,7 @@ import './MessageScreen.css'
 const MessageScreen = props => {
 
     return(
-        <div className="MessageScreen">
+        <div className={"MessageScreen " + props.theme}>
             {props.message}
         </div>
     )

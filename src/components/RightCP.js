@@ -8,7 +8,7 @@ import statsImg from '..//resources/stats.png'
 const   RightCP = props => {
 
     return(
-        <div className="RightCP">
+        <div className={"RightCP " + props.theme}>
             <div className="rButtonBlock">
                 <div className="rButton rtop" onClick={()=>{props.handleSettingsClick(); props.buttonSound.play()}}>
                     <img src={settingsImg} alt="Settings" className="rpicture"/>

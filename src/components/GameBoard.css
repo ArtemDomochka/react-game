@@ -3,7 +3,6 @@
     bottom: 0;
     height: 95%;
     width: 100%;
-    background-color: #ff0058;
 }
 
 .btn-clm{
@@ -26,17 +25,6 @@
 .pct:hover{
     filter: brightness(1.25);
 }
-
-.rotation{
-    animation: appearence 1s e;
-}
-
-@keyframes appearence{
-    100%{
-        rotate: 360deg;
-    }
-}
-
 
 
 

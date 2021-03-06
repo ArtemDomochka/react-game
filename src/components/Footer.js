@@ -7,7 +7,7 @@ import youTubeLogo from '../resources/youtube-logo.png'
 const Footer = props => {
 
     return(
-        <footer className="Footer">
+        <footer className={"Footer " + props.theme}>
             <div className="logodiv">
                 <a href="https://github.com/ArtemDomochka/react-game" rel="noreferrer" target="_blank">
                     <img src={gitLogo} alt="RsSchool" className="logo"/>

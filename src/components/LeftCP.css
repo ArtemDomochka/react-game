@@ -1,9 +1,15 @@
 .LeftCP{
     height: 100%;
     width: 6%;
-    background-color: green;
     display: table-cell;
+}
+
+.blue{
     background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+}
+
+.red{
+    background: linear-gradient(#FFFFFF, red, #FFFFFF);
 }
 
 .ButtonBlock{

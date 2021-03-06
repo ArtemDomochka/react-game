@@ -4,7 +4,7 @@ import './Statistics.css'
 const Statistics = props => {
 
     return(
-        <div className="Statistics" style={{visibility:props.visibility}}>
+        <div className={"Statistics " + props.theme} style={{visibility:props.visibility}}>
             <button className="st-button" onClick={props.handleStatsClick}>
                 X
             </button>

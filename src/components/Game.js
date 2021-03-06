@@ -10,6 +10,8 @@ import bSound from '../resources/button-16.mp3'
 import Hotkeys from 'react-hot-keys'
 import Statistics from './Statistics'
 import Settings from './Settings'
+import Message from './Message'
+
 
 const music = new Audio(musicSound)
 const buttonSound = new Audio(bSound)
@@ -34,12 +36,14 @@ class Game extends React.Component {
             },
             settingsVisibility : "hidden",
             statisticsVisibility : "hidden",
+            messageVisibility: "hidden",
             musicVolume: 0,
             buttonVolume: 0,
-            difficalty: "easy"
+            difficalty: "hard",
+            blocked : false,
+            msg : "Weclome",
+            boardSize: 70
         }
-
-        this.boardRef = React.createRef();
 
         this.onCellClick = this.onCellClick.bind(this);
         this.refreshGame = this.refreshGame.bind(this);
@@ -51,6 +55,11 @@ class Game extends React.Component {
         this.changeMusicVolume = this.changeMusicVolume.bind(this);
         this.changeSoundVolume = this.changeSoundVolume.bind(this);
         this.handleDifficalty = this.handleDifficalty.bind(this);
+        this.playNewGameVsPc = this.playNewGameVsPc.bind(this);
+        this.playNewGameVsPlayer = this.playNewGameVsPlayer.bind(this);
+        this.playAutoGameR = this.playAutoGameR.bind(this);
+        this.showMessage = this.showMessage.bind(this);
+        this.handleChangeBoardSize = this.handleChangeBoardSize.bind(this);
     }
 
     componentDidMount(){
@@ -130,7 +139,7 @@ class Game extends React.Component {
         }
 
         if(this.state.mode === "vsPc"){
-            await this.sleep(500)
+            await this.sleep(700)
             this.makePcTurn()
         }
 
@@ -230,8 +239,13 @@ class Game extends React.Component {
 
             this.setState({
                 boardStatus: boardStatus,
-                message: `Player ${this.state.player} won!`,
+                message: `Player ${this.state.player} Won!`,
             })
+
+            let p = this.state.player // почему бех этой строчки игрок на оборот
+            setTimeout(()=>{
+                this.showMessage(`Player ${p} Won!`)
+            }, 50)
 
             if(this.state.mode === "vsPc" && this.state.player === "X"){
                 let stats = this.state.stats
@@ -255,6 +269,9 @@ class Game extends React.Component {
             this.setState({
                 message: "Tie!",
             })
+            setTimeout(()=>{
+                this.showMessage("Tie!")
+            }, 50)
             return true
         }
 
@@ -269,27 +286,30 @@ class Game extends React.Component {
         this.setState({
             message: "Playing Auto Game",
             mode: "autoGame",
-            status: "notPlaying"
+            status: "notPlaying",
+            blocked : true
         })
 
         let player = "X"
         while(true){
-            let boardStatus = this.state.boardStatus
-            for(let i = 0; i < boardStatus.length; i++){
-                if(boardStatus[i] === "empty"){
-                    
+
+            let turns = [3,1,8,5,4,2,7,6,0]
+            for(let i = 0; i < this.state.boardStatus.length; i++){
+                if(this.state.boardStatus[turns[i]] === "empty"){
+                    let boardStatus = this.state.boardStatus
+                                         
                     if(player === "X"){
-                        boardStatus[i] = "cross"
+                        boardStatus[turns[i]] = "cross"
                         player = "O"
                     }else{
-                        boardStatus[i] = "circle"
+                        boardStatus[turns[i]] = "circle"
                         player = "X"
                     }
-                    
-                    await this.sleep(1000)
 
+                    await this.sleep(900)
                     this.setState({
-                        boardStatus: boardStatus
+                        boardStatus: boardStatus,
+                        player: player
                     })
                     break;
                 }
@@ -297,7 +317,8 @@ class Game extends React.Component {
             
             if(this.isGameFinished()){
                 this.setState({
-                    status: "notPlaying"
+                    status: "notPlaying",
+                    blocked: false
                 })
                 break;
             }
@@ -415,6 +436,62 @@ class Game extends React.Component {
         })
     }
 
+    playNewGameVsPc(){
+        if(this.state.blocked) return
+        setTimeout(()=>{
+            this.showMessage("To Battle!")
+        }, 100)
+        this.refreshGame()
+        this.setState({mode: "vsPc", message: "Playing Game Vs Computer"})
+    }
+
+    playNewGameVsPlayer(){
+        if(this.state.blocked) return
+        setTimeout(()=>{
+            this.showMessage("To Battle!")
+        }, 50)
+        this.refreshGame()
+        this.setState({mode: "2Players", message: "Playing Vs Another Player"})
+    }
+
+    playAutoGameR(){
+        if(this.state.blocked) return
+        this.refreshGame()
+        setTimeout(()=>{this.playAutoGame()},200)
+    }
+
+    showMessage(msg){
+
+        if(this.state.messageVisibility === "hidden"){
+            this.setState({
+                messageVisibility: "visible",
+                msg: msg
+            })
+        }else{
+            this.setState({
+                messageVisibility : "hidden"
+            })
+        }  
+
+        setTimeout(()=>{
+            if(this.state.messageVisibility === "hidden"){
+                this.setState({
+                    messageVisibility: "visible"
+                })
+            }else{
+                this.setState({
+                    messageVisibility : "hidden"
+                })
+            } 
+        }, 1000)
+    }
+
+    handleChangeBoardSize(e){
+        this.setState({
+            boardSize: e.target.value
+        })
+    }
+
     render(){
         return(
             <Hotkeys
@@ -425,6 +502,7 @@ class Game extends React.Component {
                 visibility={this.state.statisticsVisibility}
                 statistics={this.state.stats}
                 handleStatsClick={this.handleStatsClick}
+                theme={this.props.theme}
             />    
             <Settings
                 visibility={this.state.settingsVisibility}
@@ -434,20 +512,30 @@ class Game extends React.Component {
                 buttonVolume={this.state.buttonVolume}
                 changeSoundVolume={this.changeSoundVolume}
                 handleDifficalty={this.handleDifficalty}
-            />        
-            <div className="Game">
+                theme={this.props.theme}
+                handleChangeTheme={this.props.handleChangeTheme}
+                handleChangeBoardSize={this.handleChangeBoardSize}
+            />    
+            <Message
+                messageVisibility={this.state.messageVisibility}
+                message={this.state.msg}
+                theme={this.props.theme}
+            />
+            <div className="Game" style={{width: `${this.state.boardSize}%`}}>
                 <div className="GameBoardAndCPsAndMessageScreen">
                     <LeftCP
                     onKeyDown={()=>{console.log("OOO")}}
-                        playNewGameVsPc={()=>{this.refreshGame(); this.setState({mode: "vsPc", message: "Playing Game Vs Computer"})}}
-                        playNewGameVsPlayer={()=>{this.refreshGame(); this.setState({mode: "2Players", message: "Playing Vs Another Player"})}}
-                        playAutoGame={()=>{this.refreshGame(); setTimeout(()=>{this.playAutoGame()}, 200)}}
+                        playNewGameVsPc={this.playNewGameVsPc}
+                        playNewGameVsPlayer={this.playNewGameVsPlayer}
+                        playAutoGame={this.playAutoGameR}
                         wins={this.state.stats.win}
                         buttonSound={buttonSound}
+                        theme={this.props.theme}
                     />
                     <div className="MessageScreenAndGameBoard">
                         <MessageScreen
                             message={this.state.message}
+                            theme={this.props.theme}
                         />
                         <GameBoard
                             onCellClick={this.onCellClick}
@@ -459,10 +547,13 @@ class Game extends React.Component {
                         handleMuteClick={this.handleMuteClick}      
                         handleSettingsClick={this.handleSettingsClick}   
                         handleStatsClick={this.handleStatsClick}  
-                        buttonSound={buttonSound}           
+                        buttonSound={buttonSound} 
+                        theme={this.props.theme}          
                     />
                 </div>
-                <Footer/>
+                <Footer
+                    theme={this.props.theme}
+                />
             </div>
             </Hotkeys>
         )
