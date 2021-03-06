@@ -1,0 +1,70 @@
+.image{
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    animation: appearence 0.7s;
+}
+
+.image:hover{
+    filter: brightness(1.25);
+}
+
+@keyframes appearence{
+    0%{
+        filter: blur(0px);
+    }    
+    50%{
+        filter: blur(5px);
+    }
+    100%{
+        filter: blur(0px);
+    }
+}
+
+.imageR1{
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    animation: appearenceR1 1s;
+}
+
+.imageR2{
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    animation: appearenceR2 1s;
+}
+
+.imageR1:hover{
+    filter: brightness(1.25);
+}
+
+.imageR2:hover{
+    filter: brightness(1.25);
+}
+
+@keyframes appearenceR1{
+    0%{
+        filter: blur(0px);
+    }    
+    50%{
+        filter: blur(5px);
+        border: 5px solid red;
+    }
+    100%{
+        filter: blur(0px);
+    }
+}
+
+@keyframes appearenceR2{
+    0%{
+        filter: blur(0px);
+    }    
+    50%{
+        filter: blur(5px);
+        border: 5px solid red;
+    }
+    100%{
+        filter: blur(0px);
+    }
+}

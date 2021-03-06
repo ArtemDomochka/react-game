@@ -1,0 +1,77 @@
+.LeftCP{
+    height: 100%;
+    width: 6%;
+    display: table-cell;
+}
+
+.blue{
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+}
+
+.red{
+    background: linear-gradient(#FFFFFF, red, #FFFFFF);
+}
+
+.ButtonBlock{
+    position: absolute;
+    top: 5%;
+    height: 30.8%;
+    width: 6%;
+    background-color: aqua;
+
+}
+
+.Button{
+    height: 33.33%;
+    width: 100%;
+}
+
+.Button:hover{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    filter: brightness(1.15);
+    cursor: pointer;
+}
+
+.picture{
+    height: 100%;
+    width: 100%
+}
+
+.Stats{
+    position: absolute;
+    bottom: 0;
+    width: 6%;
+    text-align: center;
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+    color: white;
+}
+
+    @media screen and (max-width: 1024px) {
+        .Stats{
+            font-size: 100%;
+        }
+    }
+    
+    @media screen and (max-width: 950px) {
+        .Stats{
+            font-size: 60%;
+        }
+    
+    }
+    
+    
+    @media screen and (max-width: 650px) {
+        .Stats{
+            font-size: 40%;
+        }
+    
+    
+    }
+    
+    @media screen and (max-width: 480px) {
+        .Stats{
+            font-size: 30%;
+        }
+    
+    }

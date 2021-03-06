@@ -1,0 +1,79 @@
+.Footer{
+    position: absolute;
+    bottom: 0;
+    height: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: white
+}
+
+.blue{
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+}
+
+.red{
+    background: linear-gradient(#FFFFFF, red, #FFFFFF);
+}
+
+.Button{
+    height: 100%;
+    background-color: black;
+    border: 1px solid rgb(128, 1, 1);
+}
+
+.logodiv{
+    height: 93%;
+    width: 8%;
+    border: 1px solid black;
+}
+
+.logodiv:hover{
+    border: 2px solid black;
+}
+
+.logo{
+    height: 100%;
+    width: 100%;
+}
+
+.label{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 6%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    .label{
+        font-size: 100%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .label{
+        font-size: 60%;
+    }
+
+}
+
+
+@media screen and (max-width: 650px) {
+    .label{
+        font-size: 40%;
+    }
+
+
+}
+
+@media screen and (max-width: 480px) {
+    .label{
+        font-size: 30%;
+    }
+
+}

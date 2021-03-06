@@ -1,0 +1,52 @@
+.MessageM{
+    position: absolute;
+    height: 20%;
+    width:40%;
+    border: 2px solid black;
+    z-index: 2;
+    top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-size: 450%; 
+    /* почему, если это убрать, то шрифт не меняется - font-size: 450%; */
+}
+
+.blue{
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+}
+
+.red{
+    background: linear-gradient(#FFFFFF, red, #FFFFFF);
+}
+
+@media screen and (max-width: 1024px) {
+    .MessageM{
+        font-size: 450%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .MessageM{
+        font-size: 300%;
+    }
+
+}
+
+
+@media screen and (max-width: 650px) {
+    .MessageM{
+        font-size: 150%;
+    }
+
+
+}
+
+@media screen and (max-width: 480px) {
+    .MessageM{
+        font-size: 70%;
+    }
+
+}

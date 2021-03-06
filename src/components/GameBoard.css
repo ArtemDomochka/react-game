@@ -1,0 +1,33 @@
+.GameBoard{
+    position: absolute;
+    bottom: 0;
+    height: 95%;
+    width: 100%;
+}
+
+.btn-clm{
+    height: 33.33%;
+    width: 100%;
+    display: flex;
+}
+
+.btn{
+    height: 100%;
+    width: 33.33%;
+}
+
+.pct{
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.pct:hover{
+    filter: brightness(1.25);
+}
+
+
+
+
+
+

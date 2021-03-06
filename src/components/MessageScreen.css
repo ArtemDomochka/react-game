@@ -1,0 +1,13 @@
+.MessageScreen{
+    position: absolute;
+    top: 0;
+    height: 5%;
+    width: 100%;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 0%, rgba(0,212,255,1) 100%);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}

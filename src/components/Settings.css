@@ -1,0 +1,72 @@
+.Settings{
+    position: absolute;
+    height: 80%;
+    width:40%;
+    border: 2px solid black;
+    z-index: 1;
+    top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.blue{
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+}
+
+.red{
+    background: linear-gradient(#FFFFFF, red, #FFFFFF);
+}
+
+.setContent{
+    color: white
+}
+
+.set-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: black;
+    background-color: rgba(42, 42, 180, 0.945);
+}
+
+.set-button:hover{
+    filter: brightness(1.15);
+}
+
+.tab{
+    width: fit-content;
+    border: 2px solid darkblue;
+    margin: auto;
+}
+
+@media screen and (max-width: 1024px) {
+    .Settings{
+        font-size: 100%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .Settings{
+        font-size: 60%;
+    }
+
+}
+
+
+@media screen and (max-width: 650px) {
+    .Settings{
+        font-size: 40%;
+    }
+
+
+}
+
+@media screen and (max-width: 480px) {
+    .Settings{
+        font-size: 30%;
+    }
+
+}

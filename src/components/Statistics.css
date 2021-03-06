@@ -1,0 +1,82 @@
+.Statistics{
+    position: absolute;
+    height: 50%;
+    width:40%;
+    border: 2px solid black;
+    z-index: 1;
+    top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.blue{
+    background: radial-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(5,111,188,1) 56%, rgba(0,212,255,1) 100%);
+}
+
+.red{
+    background: linear-gradient(#FFFFFF, red, #FFFFFF);
+}
+
+.stContent{
+    color: white
+}
+
+.st-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: black;
+    background-color: rgba(42, 42, 180, 0.945);
+}
+
+.st-button:hover{
+    filter: brightness(1.15);
+}
+
+.tabS{
+    width: fit-content;
+    margin: auto;
+}
+
+.lineS{
+    display: flex;
+    
+}
+
+/* .head{
+    position: absolute;
+    top: 0
+} */
+
+@media screen and (max-width: 1024px) {
+    .Statistics{
+        font-size: 100%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .Statistics{
+        font-size: 60%;
+    }
+
+}
+
+
+@media screen and (max-width: 650px) {
+    .Statistics{
+        font-size: 40%;
+    }
+
+
+}
+
+@media screen and (max-width: 480px) {
+    .Statistics{
+        font-size: 30%;
+    }
+
+}
