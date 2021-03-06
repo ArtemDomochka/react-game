@@ -9,6 +9,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .blue{
@@ -33,4 +35,48 @@
 
 .st-button:hover{
     filter: brightness(1.15);
+}
+
+.tabS{
+    width: fit-content;
+    margin: auto;
+}
+
+.lineS{
+    display: flex;
+    
+}
+
+/* .head{
+    position: absolute;
+    top: 0
+} */
+
+@media screen and (max-width: 1024px) {
+    .Statistics{
+        font-size: 100%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .Statistics{
+        font-size: 60%;
+    }
+
+}
+
+
+@media screen and (max-width: 650px) {
+    .Statistics{
+        font-size: 40%;
+    }
+
+
+}
+
+@media screen and (max-width: 480px) {
+    .Statistics{
+        font-size: 30%;
+    }
+
 }

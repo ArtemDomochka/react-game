@@ -42,7 +42,8 @@ class Game extends React.Component {
             difficalty: "hard",
             blocked : false,
             msg : "Weclome",
-            boardSize: 70
+            boardSize: 70,
+            statatistic: []
         }
 
         this.onCellClick = this.onCellClick.bind(this);
@@ -60,6 +61,7 @@ class Game extends React.Component {
         this.playAutoGameR = this.playAutoGameR.bind(this);
         this.showMessage = this.showMessage.bind(this);
         this.handleChangeBoardSize = this.handleChangeBoardSize.bind(this);
+        this.createStatistic = this.createStatistic.bind(this);
     }
 
     componentDidMount(){
@@ -80,7 +82,8 @@ class Game extends React.Component {
                 "empty","empty","empty",
                 "empty","empty","empty",
                 "empty","empty","empty"
-            ]
+            ],
+            statatistic: JSON.parse(localStorage.getItem("statatistic")) || []
         })
         
     }
@@ -96,6 +99,7 @@ class Game extends React.Component {
         localStorage.setItem("statisticsVisibility", this.state.statisticsVisibility)
         localStorage.setItem("stats", JSON.stringify(this.state.stats))
         localStorage.setItem("boardStatus", JSON.stringify(this.state.boardStatus))
+        localStorage.setItem("statatistic", JSON.stringify(this.state.statatistic))
 
     }
 
@@ -242,6 +246,8 @@ class Game extends React.Component {
                 message: `Player ${this.state.player} Won!`,
             })
 
+            this.createStatistic(this.state.player)
+
             let p = this.state.player // почему бех этой строчки игрок на оборот
             setTimeout(()=>{
                 this.showMessage(`Player ${p} Won!`)
@@ -269,6 +275,8 @@ class Game extends React.Component {
             this.setState({
                 message: "Tie!",
             })
+            this.createStatistic("Tie")
+
             setTimeout(()=>{
                 this.showMessage("Tie!")
             }, 50)
@@ -492,6 +500,21 @@ class Game extends React.Component {
         })
     }
 
+    createStatistic(winner){
+        let statatistic = this.state.statatistic
+        if(statatistic.length === 10) statatistic.shift()
+        const date = new Date()
+        statatistic.push({
+            date: date.getDay() + "." + date.getMonth() + "." + date.getFullYear(),
+            mode: this.state.mode,
+            winner: winner
+        })        
+
+        this.setState({
+            statatistic: statatistic
+        })
+    }
+
     render(){
         return(
             <Hotkeys
@@ -500,7 +523,7 @@ class Game extends React.Component {
             >
             <Statistics
                 visibility={this.state.statisticsVisibility}
-                statistics={this.state.stats}
+                statistics={this.state.statatistic}
                 handleStatsClick={this.handleStatsClick}
                 theme={this.props.theme}
             />    

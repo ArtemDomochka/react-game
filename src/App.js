@@ -21,16 +21,10 @@ function App() {
     setTheme(e.target.value)
   }
 
-  // const [status, setStatus] = useState("stop")
-
   return (
     // <div>
-    //   <button onClick={setStatus("start")}>
-    //     Start
-    //   </button>
-    //   <button onClick={setStatus("stop")}>
-    //     Stop
-    //   </button> 
+    //   <Timer />
+      
     // </div>
 
     <FullScreen handle={handle}>
